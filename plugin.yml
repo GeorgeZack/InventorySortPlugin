@@ -1,0 +1,42 @@
+name: InventorySort
+main: com.george.invPlugin.InventorySort
+version: 1.5.1
+commands:
+    # sort:
+        # description: Sorts inventory of player or of a chest.
+        # aliases: s
+        # usage: |
+            # /<command> [type]
+    # sort-toggle:
+        # description: Toggles the ability to sort.
+        # aliases: st
+        # usage: |
+            # /<command> [target]
+permissions:
+    inventorysort.*:
+        description: Gives access to all Inventory Sort commands
+        children:
+            inventorysort.sort: true
+            inventorysort.sortchest: true
+            inventorysort.sorttoggle: true
+            inventorysort.sorttoggle.others: false
+    inventorysort.sort:
+        description: Allows you to sort your inventory
+        default: true
+    inventorysort.sortchest:
+        description: Allows you to sort chests
+        default: true
+        children:
+            inventorysort.sort: true
+    inventorysort.toggle:
+        description: Allows you to toggle sorting
+        default: true
+    inventorysort.toggle.others:
+        description: Allows you to toggle sorting for other players
+        default: false
+    inventorysort.type:
+        description: Changes what type of sorting to perform
+        defualt: true
+    inventorysort.secure:
+        description: Secures selected chest
+        default: true
