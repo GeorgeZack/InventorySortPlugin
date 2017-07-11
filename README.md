@@ -5,31 +5,32 @@ InventorySortPlugin
 I was disappointed to find the only good inventory sort plugins that were available are premium. So I decided to make my own!
 
 ​
-Features:
+## Features:
 Sort your inventory! Simply type the command (more below) or click the middle mouse button!
 Sort your chests too!
 
 
-Default Commands:
-/sort - The main command that will sort a player inventory or the inventory of a chest a player is looking at.
-/s - Shorthand for /sort
-/sort-toggle [playername] - Command able to toggle sorting chests by hitting them (left clicking), with playername argument as an optional parameter if you have permissions.
-/st - Shorthand of /sort-toggle
+## Default Commands:
+`/sort` - The main command that will sort a player inventory or the inventory of a chest a player is looking at.
+`/s` - Shorthand for `/sort`
+`/sort-toggle [playername]` - Command able to toggle sorting chests by hitting them (left clicking), with playername argument as an optional parameter if you have permissions.
+`/st` - Shorthand of /sort-toggle
 
 
-Usage:
-You can use /sort or /s to sort your inventory or the inventory of the chest you are looking at.
+## Usage:
+You can use `/sort` or `/s` to sort your inventory or the inventory of the chest you are looking at.
 Alternatively, you can left-click chests to sort them (if sort-toggle is enabled), or middle click in the inventory screen to sort
 The default sort will toggle between ascending and descending order by item ID. Adding a type after the sort command will force that type of sort:
 
 Type: a, asc, ascend, ascending, d, des, descend, descending
-Example: /sort d - Sort inventory in descending order
+Example: `/sort d` - Sort inventory in descending order
 
 
-Default config.yml:
+## Default config.yml:
 Code (Text):
 
-`messages:
+```
+messages:
   inv-message: '&8Sorted your inventory'
   inv-message-send: false
   chest-message: '&8Sorted your chest'
@@ -83,10 +84,11 @@ secure-options:
   secure-usage: "/<command> \n§6Example:§f /<command> - Secures selected chest"
 debug:
   toggle-player-offline: '&cPlayer is not online'
-  monster-egg-error: '&cMonster eggs can''t be stacked'`
+  monster-egg-error: '&cMonster eggs can''t be stacked'
+```
  
 
-Permissions:
+## Permissions:
 inventorysort.sort - Allows you to sort your inventory
 inventorysort.sortchest - Allows you to sort a chest, with inventorysort.sort as a child permission
 inventorysort.sorttoggle - Allows you to toggle the sorting command
@@ -95,13 +97,13 @@ inventorysort.sorttype - Changes the type of sorting to take place.
 inventorysort.* - Allows you to do all available sort commands, contains all other permissions as children
 
 
-Current Features:
-Permissions (Added 1.1.0)
-Configurations (Added 1.2.0)
-Cooldown (Added 1.3.0)
-Toggling (Added 1.3.0)
-Multi-Language (Added 1.4.0)
-Security (Added 1.5.0)
-More ways to sort (alphabetical) (Added 1.5.0)
+## Current Features:
+- Permissions (Added 1.1.0)
+- Configurations (Added 1.2.0)
+- Cooldown (Added 1.3.0)
+- Toggling (Added 1.3.0)
+- Multi-Language (Added 1.4.0)
+- Security (Added 1.5.0)
+- More ways to sort (alphabetical) (Added 1.5.0)
 
-**NOTE** I (GeorgeZ) will no longer be working on the project.
+**NOTE** I (George) will no longer be working on the project.
