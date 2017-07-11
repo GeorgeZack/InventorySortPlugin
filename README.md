@@ -89,12 +89,12 @@ debug:
  
 
 ## Permissions:
-inventorysort.sort - Allows you to sort your inventory
-inventorysort.sortchest - Allows you to sort a chest, with inventorysort.sort as a child permission
-inventorysort.sorttoggle - Allows you to toggle the sorting command
-inventorysort.sorttoggle.others - Allows you to toggle other players sorting command, with inventorysort.sorttoggle as a child permission
-inventorysort.sorttype - Changes the type of sorting to take place.
-inventorysort.* - Allows you to do all available sort commands, contains all other permissions as children
+- inventorysort.sort - Allows you to sort your inventory
+- inventorysort.sortchest - Allows you to sort a chest, with inventorysort.sort as a child permission
+- inventorysort.sorttoggle - Allows you to toggle the sorting command
+- inventorysort.sorttoggle.others - Allows you to toggle other players sorting command, with inventorysort.sorttoggle as a child permission
+- inventorysort.sorttype - Changes the type of sorting to take place.
+- inventorysort.* - Allows you to do all available sort commands, contains all other permissions as children
 
 
 ## Current Features:
