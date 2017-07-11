@@ -1,6 +1,6 @@
 InventorySortPlugin
 
-InventorySort!
+# InventorySort!
 
 I was disappointed to find the only good inventory sort plugins that were available are premium. So I decided to make my own!
 
@@ -29,7 +29,7 @@ Example: /sort d - Sort inventory in descending order
 Default config.yml:
 Code (Text):
 
-messages:
+`messages:
   inv-message: '&8Sorted your inventory'
   inv-message-send: false
   chest-message: '&8Sorted your chest'
@@ -83,7 +83,7 @@ secure-options:
   secure-usage: "/<command> \n§6Example:§f /<command> - Secures selected chest"
 debug:
   toggle-player-offline: '&cPlayer is not online'
-  monster-egg-error: '&cMonster eggs can''t be stacked'
+  monster-egg-error: '&cMonster eggs can''t be stacked'`
  
 
 Permissions:
@@ -104,4 +104,4 @@ Multi-Language (Added 1.4.0)
 Security (Added 1.5.0)
 More ways to sort (alphabetical) (Added 1.5.0)
 
-*NOTE* I (GeorgeZ) will no longer be working on the project.
+**NOTE** I (GeorgeZ) will no longer be working on the project.
