@@ -5,16 +5,15 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_11_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_13_R2.CraftServer;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import net.md_5.bungee.api.ChatColor;
 
 public class InventorySort extends JavaPlugin {
 
@@ -22,11 +21,11 @@ public class InventorySort extends JavaPlugin {
 	private File configF, dataF;
 	private FileConfiguration config, data;
 	private static CommandMap cmap;
-	CraftServer server = (CraftServer) Bukkit.getServer();
+	Server server = Bukkit.getServer();
 	
     @Override
     public void onEnable() {
-    	Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "[InventorySort] Inventory" + ChatColor.AQUA + "Sort" + ChatColor.GRAY + " is loading...");
+    	Bukkit.getConsoleSender().sendMessage(org.bukkit.ChatColor.GRAY + "[InventorySort] Inventory" + org.bukkit.ChatColor.AQUA + "Sort" + org.bukkit.ChatColor.GRAY + " is loading...");
         try{
             if(Bukkit.getServer() instanceof CraftServer){
                 final Field f = CraftServer.class.getDeclaredField("commandMap");
@@ -40,6 +39,7 @@ public class InventorySort extends JavaPlugin {
     	createFiles();
     	FileConfiguration config = getConfig();
         getLogger().info("Registering commands...");
+        
     	if (config.getConfigurationSection("messages") == null) {
     		config.createSection("messages");
     	}
@@ -51,18 +51,20 @@ public class InventorySort extends JavaPlugin {
     	messages.addDefault("toggle-message-on", "&8Chest sorting disabled");
     	messages.addDefault("toggle-message-off", "&8Chest sorting enabled");
     	messages.addDefault("toggle-message-send", true);
-    	messages.addDefault("sort-type-message-int", "&8Sorting by ID");
-    	messages.addDefault("sort-type-message-string", "&8Sorting by Name");
+//    	messages.addDefault("sort-type-message-int", "&8Sorting by ID");
+//    	messages.addDefault("sort-type-message-string", "&8Sorting by Name");
     	messages.addDefault("secure-message", "&8Chest secured, only you can sort this chest");
     	messages.addDefault("secure-message-duplicate", "&cChest is already secured");
     	messages.addDefault("secure-message-error", "&cNot a chest, try again");
     	messages.addDefault("secure-message-owned", "&cChest is secured and cannot be sorted by you");
+    	
     	if (config.getConfigurationSection("cooldown") == null) {
     		config.createSection("cooldown");
     	}
     	ConfigurationSection cooldown = config.getConfigurationSection("cooldown");
     	cooldown.addDefault("cooldown-hot-message", "&cYou still have time left before you can use the command");
     	cooldown.addDefault("cooldown-time", 0);
+    	
     	if (config.getConfigurationSection("permissions") == null) {
     		config.createSection("permissions");
     	}
@@ -71,8 +73,9 @@ public class InventorySort extends JavaPlugin {
     	permissions.addDefault("chest-lackof-permission", "&cYou don't have permission to sort chests");
     	permissions.addDefault("toggle-lackof-permission", "&cYou don't have permission to toggle chest sorting");
     	permissions.addDefault("toggle-others-lackof-permission", "&cYou don't have permission to toggle other players chest sorting");
-    	permissions.addDefault("type-lackof-permission", "&cYou don't have permission to change sorting behavior");
+//    	permissions.addDefault("type-lackof-permission", "&cYou don't have permission to change sorting behavior");
     	permissions.addDefault("secure-lackof-permission", "&cYou don't have permission to secure a chest");
+    	
     	if (config.getConfigurationSection("sort-options") == null) {
     		config.createSection("sort-options");
     	}
@@ -81,8 +84,9 @@ public class InventorySort extends JavaPlugin {
     	sortOptions.addDefault("sort-command-alias", "s");
     	sortOptions.addDefault("sort-help", "Sorts inventory of player or of a chest.");
     	sortOptions.addDefault("sort-usage", "/<command> [type] \n" +
-            "\u00A76Type:\u00A7f (a, asc, d, des) or (up, abc, down, xyz) \n" +
-            "\u00A76Example:\u00A7f /<command> descending - Sort inventory in descending order");
+            "\u00A76Type:\u00A7f (up, abc, down, xyz) \n" +
+            "\u00A76Example:\u00A7f /<command> up - Sort inventory in alphabetical order");
+    	
     	if (config.getConfigurationSection("toggle-options") == null) {
     		config.createSection("toggle-options");
     	}
@@ -94,19 +98,20 @@ public class InventorySort extends JavaPlugin {
 	        "\u00A76Target:\u00A7f playername \n" +
 	        "\u00A76Example:\u00A7f /<command> - Toggles ability to sort chests on click \n" +
 	        "\u00A76Example:\u00A7f /<command> Notch - Toggles ability to sort chests for Notch");
-    	if (config.getConfigurationSection("type-options") == null) {
-    		config.createSection("type-options");
-    	}
-    	ConfigurationSection typeOptions = config.getConfigurationSection("type-options");
-    	typeOptions.addDefault("type-command", "sort-type");
-    	typeOptions.addDefault("type-command-alias", "sy");
-    	typeOptions.addDefault("type-help", "Changes the default sorting behavior.");
-    	typeOptions.addDefault("type-usage", "/<command> [type] \n" +
-			"\u00A76Type:\u00A7f id, name \n" +
-			"\u00A76Example:\u00A7f /<command> - Toggles whether sorting should be by \n" +
-			"ID or by names\n" +
-			"\u00A76Example:\u00A7f /<command> id - Forces type to be by ID\n" +
-			"\u00A76Example:\u00A7f /<command> name - Forces type to be by names");
+//    	if (config.getConfigurationSection("type-options") == null) {
+//    		config.createSection("type-options");
+//    	}
+//    	ConfigurationSection typeOptions = config.getConfigurationSection("type-options");
+//    	typeOptions.addDefault("type-command", "sort-type");
+//    	typeOptions.addDefault("type-command-alias", "sy");
+//    	typeOptions.addDefault("type-help", "Changes the default sorting behavior.");
+//    	typeOptions.addDefault("type-usage", "/<command> [type] \n" +
+//			"\u00A76Type:\u00A7f id, name \n" +
+//			"\u00A76Example:\u00A7f /<command> - Toggles whether sorting should be by \n" +
+//			"ID or by names\n" +
+//			"\u00A76Example:\u00A7f /<command> id - Forces type to be by ID\n" +
+//			"\u00A76Example:\u00A7f /<command> name - Forces type to be by names");
+    	
     	if (config.getConfigurationSection("secure-options") == null) {
     		config.createSection("secure-options");
     	}
@@ -116,6 +121,7 @@ public class InventorySort extends JavaPlugin {
 		secureOptions.addDefault("secure-help", "Secures chest so only you can sort this chest");
 		secureOptions.addDefault("secure-usage", "/<command> \n" +
             "\u00A76Example:\u00A7f /<command> - Secures selected chest");
+		
     	if (config.getConfigurationSection("debug") == null) {
     		config.createSection("debug");
     	}
@@ -131,8 +137,8 @@ public class InventorySort extends JavaPlugin {
 		String sortCommandAlias = sortOptions.getString("sort-command-alias");
 		String toggleCommand = toggleOptions.getString("toggle-command");
 		String toggleCommandAlias = toggleOptions.getString("toggle-command-alias");
-		String typeCommand = typeOptions.getString("type-command");
-		String typeCommandAlias = typeOptions.getString("type-command-alias");
+//		String typeCommand = typeOptions.getString("type-command");
+//		String typeCommandAlias = typeOptions.getString("type-command-alias");
 		String secureCommand = secureOptions.getString("secure-command");
 		String secureCommandAlias = secureOptions.getString("secure-command-alias");
 	    
@@ -152,13 +158,13 @@ public class InventorySort extends JavaPlugin {
 		cmap.register(toggleCommandAlias, toggleAlias);
 		((CommandSortToggle) toggleAlias).setExecutor(this);
 
-		Command type = new CommandSortType(typeCommand);
-		cmap.register(typeCommand, type);
-		((CommandSortType) type).setExecutor(this);
-		
-		Command typeAlias = new CommandSortType(typeCommandAlias);
-		cmap.register(typeCommandAlias, typeAlias);
-		((CommandSortType) typeAlias).setExecutor(this);
+//		Command type = new CommandSortType(typeCommand);
+//		cmap.register(typeCommand, type);
+//		((CommandSortType) type).setExecutor(this);
+//		
+//		Command typeAlias = new CommandSortType(typeCommandAlias);
+//		cmap.register(typeCommandAlias, typeAlias);
+//		((CommandSortType) typeAlias).setExecutor(this);
 		
 		Command secure = new CommandSortSecure(secureCommand);
 		cmap.register(secureCommand, secure);
@@ -175,7 +181,7 @@ public class InventorySort extends JavaPlugin {
     
 	@Override
     public void onDisable() {
-    	Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "[InventorySort] Inventory" + ChatColor.AQUA + "Sort" + ChatColor.GRAY + " disabled");
+    	Bukkit.getConsoleSender().sendMessage(org.bukkit.ChatColor.GRAY + "[InventorySort] Inventory" + org.bukkit.ChatColor.AQUA + "Sort" + org.bukkit.ChatColor.GRAY + " disabled");
     }
 
     private void createFiles() {

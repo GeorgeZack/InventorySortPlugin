@@ -20,7 +20,9 @@ public class EventListener implements Listener {
 	String toggleMessageOff = InventorySort.getInstance().getConfig().getConfigurationSection("messages").getString("toggle-message-off");
 	Boolean toggleMessageBoolean = InventorySort.getInstance().getConfig().getConfigurationSection("messages").getBoolean("toggle-message-send");
 	
-    @EventHandler
+	@SuppressWarnings("deprecation")
+	// Even though updateInventory() is indicated as deprecated, that is not true according to the Spigot Documentation - 1/26/19
+	@EventHandler
     private void onPlayerInteract(PlayerInteractEvent e) {
     	Player player = e.getPlayer();
 		Block block = player.getTargetBlock((Set<Material>)null, 5);
@@ -33,6 +35,8 @@ public class EventListener implements Listener {
     	}
     }
     
+	@SuppressWarnings("deprecation")
+	// Even though updateInventory() is indicated as deprecated, that is not true according to the Spigot Documentation - 1/26/19
 	@EventHandler
     private void onPlayerClick(InventoryClickEvent e) {
     	Player player = (Player) e.getWhoClicked();
@@ -42,7 +46,7 @@ public class EventListener implements Listener {
 	    		player.performCommand(sortCommand);  
 	    		player.updateInventory();
     		} else {  	
-	    		player.sendMessage("internalPlayerSort");
+//	    		player.sendMessage("internalPlayerSort");
 	    		player.performCommand(sortCommand + " internalPlayerSort");
 	    		player.updateInventory();		
     		}

@@ -24,6 +24,7 @@ public class CommandSortToggle extends BukkitCommand {
         this.setAliases(new ArrayList<String>());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean execute(CommandSender sender, String label, String[] args) {
 		if (exe != null) {

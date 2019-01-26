@@ -40,9 +40,9 @@ public class CommandSort extends BukkitCommand {
 	Boolean invSortMessageBoolean = InventorySort.getInstance().getConfig().getConfigurationSection("messages").getBoolean("inv-message-send");
 	Boolean chestSortMessageBoolean = InventorySort.getInstance().getConfig().getConfigurationSection("messages").getBoolean("chest-message-send");
     public HashMap<String, Long> cooldowns = new HashMap<String, Long>();
-	final int INT_TOGGLE = 0;
-	final int INT_ASCENDING = 1;
-	final int INT_DESCENDING = 2;
+//	final int INT_TOGGLE = 0;
+//	final int INT_ASCENDING = 1;
+//	final int INT_DESCENDING = 2;
 	final int STRING_TOGGLE = 3;
 	final int STRING_UP = 4;
 	final int STRING_DOWN = 5;
@@ -198,8 +198,9 @@ public class CommandSort extends BukkitCommand {
 	                                needed = max - item.getAmount();
 	                            }
 	                    	}
-	            		} else if (item2.getType() == Material.MONSTER_EGG && item.getType() == Material.MONSTER_EGG) {
-							player.sendMessage(ChatColor.translateAlternateColorCodes('&', monsterEggError));
+	            			// LEGACY
+//	            		} else if (item2.getType() == Material.MONSTER_EGG && item.getType() == Material.MONSTER_EGG) {
+//							player.sendMessage(ChatColor.translateAlternateColorCodes('&', monsterEggError));
 //	            			EntityType tag2 = ((SpawnEgg) item2.getItemMeta()).getSpawnedType();
 //	            			EntityType tag = ((SpawnEgg) item.getItemMeta()).getSpawnedType();
 //	            			if (tag2.equals(tag)) {
@@ -303,24 +304,23 @@ public class CommandSort extends BukkitCommand {
 	
 	private int getSortType(String[] args) {
 		if ((args == null || args.length <= 0) && (!player.hasMetadata("type-name"))) {
-			return INT_TOGGLE;
-		} else if ((args == null || args.length <= 0) && (player.hasMetadata("type-name"))) {
 			return STRING_TOGGLE;
 		}
 		
-		if (!player.hasMetadata("type-name")) {
-			String cmd = args[0];
-			switch (cmd) {
-				case "d":
-				case "des":
-					return INT_DESCENDING;
-				case "a":
-				case "asc":
-					return INT_ASCENDING;
-				default:
-					return INT_TOGGLE;
-			}		
-		} else if (player.hasMetadata("type-name")) {
+//		if (!player.hasMetadata("type-name")) {
+//			String cmd = args[0];
+//			switch (cmd) {
+//				case "d":
+//				case "des":
+//					return INT_DESCENDING;
+//				case "a":
+//				case "asc":
+//					return INT_ASCENDING;
+//				default:
+//					return INT_TOGGLE;
+//			}		
+//		} else 
+		if (player.hasMetadata("type-name")) {
 			String cmd = args[0];
 			switch (cmd) {
 				case "xyz":
@@ -333,7 +333,7 @@ public class CommandSort extends BukkitCommand {
 					return STRING_TOGGLE;
 			}
 		} else {
-			return INT_TOGGLE;
+			return STRING_TOGGLE;
 		}
 	}
 	
@@ -376,16 +376,16 @@ public class CommandSort extends BukkitCommand {
 		}
 		
 		switch (type) {
-			case INT_TOGGLE:
-				return SortMain.SortArrayListID(items);
-			case INT_ASCENDING:
-				return SortMain.SortAscending(items);
-			case INT_DESCENDING:
-				return SortMain.SortDescending(items);
+//			case INT_TOGGLE:
+//				return SortMain.SortArrayListID(items);
+//			case INT_ASCENDING:
+//				return SortMain.SortAscending(items);
+//			case INT_DESCENDING:
+//				return SortMain.SortDescending(items);
 			case STRING_TOGGLE:
 				return SortMain.SortArrayListString(items);
 			case STRING_UP:
-				return SortMain.SortAlphabetUp(items);	
+				return SortMain.SortAlphabetUp(items);
 			case STRING_DOWN:
 				return SortMain.SortAlphabetDown(items);			
 			default:

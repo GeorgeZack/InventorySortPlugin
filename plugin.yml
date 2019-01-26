@@ -1,6 +1,6 @@
 name: InventorySort
 main: com.george.invPlugin.InventorySort
-version: 1.5.1
+version: 1.6.0
 commands:
     # sort:
         # description: Sorts inventory of player or of a chest.
@@ -34,9 +34,9 @@ permissions:
     inventorysort.toggle.others:
         description: Allows you to toggle sorting for other players
         default: false
-    inventorysort.type:
-        description: Changes what type of sorting to perform
-        defualt: true
+#    inventorysort.type:
+#        description: Changes what type of sorting to perform
+#        defualt: true
     inventorysort.secure:
         description: Secures selected chest
         default: true
