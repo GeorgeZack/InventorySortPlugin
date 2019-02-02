@@ -44,6 +44,7 @@ public class CommandSortSecure extends BukkitCommand {
 					if (isChest()) {
 				        dataF = new File(InventorySort.getInstance().getDataFolder(), "data.yml");
 				        data = new YamlConfiguration();
+				        
 				        try {
 							data.load(dataF);
 				        } catch (IOException e) {
@@ -51,11 +52,13 @@ public class CommandSortSecure extends BukkitCommand {
 						} catch (InvalidConfigurationException e) {
 							e.printStackTrace();
 						}
+				        
 				        for (String key : data.getKeys(false)) {
 				        	if (!(data.contains(key))) {
 				        		data.createSection(key);
 				        	}
 				        }
+				        
 			        	if (!(data.contains(CommandSort.getLocation(getCurrentChest().getLocation())))) {
 			        		data.set(CommandSort.getLocation(getCurrentChest().getLocation()), playerId.toString());
 					        try {
@@ -75,8 +78,10 @@ public class CommandSortSecure extends BukkitCommand {
 					player.sendMessage(ChatColor.translateAlternateColorCodes('&', secureNoPermission()));
 				}
 			}
+			
 			return true;
 		}
+		
 		return false;
 	}
 	
@@ -105,6 +110,7 @@ public class CommandSortSecure extends BukkitCommand {
     	if (block.getState() instanceof Chest) {
             return true;
         }
+    	
 		return false;
 	}
 	
@@ -114,6 +120,7 @@ public class CommandSortSecure extends BukkitCommand {
     	if (block.getState() instanceof Chest) {
         	chest = (Chest) block.getState();
     	}
+    	
     	return chest;
 	}
     

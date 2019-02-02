@@ -40,12 +40,12 @@ public class CommandSort extends BukkitCommand {
 	Boolean invSortMessageBoolean = InventorySort.getInstance().getConfig().getConfigurationSection("messages").getBoolean("inv-message-send");
 	Boolean chestSortMessageBoolean = InventorySort.getInstance().getConfig().getConfigurationSection("messages").getBoolean("chest-message-send");
     public HashMap<String, Long> cooldowns = new HashMap<String, Long>();
-//	final int INT_TOGGLE = 0;
-//	final int INT_ASCENDING = 1;
-//	final int INT_DESCENDING = 2;
-	final int STRING_TOGGLE = 3;
-	final int STRING_UP = 4;
-	final int STRING_DOWN = 5;
+    final int NAME_TOGGLE = 0;
+    final int NAME_UP = 1;
+    final int NAME_DOWN = 2;
+	final int MATERIAL_TOGGLE = 3;
+	final int MATERIAL_UP = 4;
+	final int MATERIAL_DOWN = 5;
 	final int INV_PLAYER = 0;
 	final int INV_CHEST = 1;
 	final int INV_DOUBLE_CHEST = 2;
@@ -76,6 +76,7 @@ public class CommandSort extends BukkitCommand {
 	    			}
 	    		}
 		        cooldowns.put(player.getName(), System.currentTimeMillis());
+		        
 				if (player.hasPermission("inventorysort.sort")) {
 //					player.sendMessage(args);
 		            if (Arrays.asList(args).contains("internalChestSort")) {
@@ -303,37 +304,42 @@ public class CommandSort extends BukkitCommand {
 	}
 	
 	private int getSortType(String[] args) {
-		if ((args == null || args.length <= 0) && (!player.hasMetadata("type-name"))) {
-			return STRING_TOGGLE;
+		if ((args == null || args.length <= 0) && (player.hasMetadata("sort-type"))) {
+			return MATERIAL_TOGGLE;
+		} else if ((args == null || args.length <= 0) && (!player.hasMetadata("sort-type"))) {
+			return NAME_TOGGLE;
 		}
 		
-//		if (!player.hasMetadata("type-name")) {
-//			String cmd = args[0];
-//			switch (cmd) {
-//				case "d":
-//				case "des":
-//					return INT_DESCENDING;
-//				case "a":
-//				case "asc":
-//					return INT_ASCENDING;
-//				default:
-//					return INT_TOGGLE;
-//			}		
-//		} else 
-		if (player.hasMetadata("type-name")) {
+		if (!player.hasMetadata("sort-type")) {
 			String cmd = args[0];
 			switch (cmd) {
 				case "xyz":
 				case "down":
-					return STRING_DOWN;
+				case "d":
+					return NAME_DOWN;
 				case "abc":
 				case "up":
-					return STRING_UP;
+				case "u":
+					return NAME_UP;
 				default:
-					return STRING_TOGGLE;
+					return NAME_TOGGLE;
+			}
+		} else if (player.hasMetadata("sort-type")) {
+			String cmd = args[0];
+			switch (cmd) {
+				case "xyz":
+				case "down":
+				case "d":
+					return MATERIAL_DOWN;
+				case "abc":
+				case "up":
+				case "u":
+					return MATERIAL_UP;
+				default:
+					return MATERIAL_TOGGLE;
 			}
 		} else {
-			return STRING_TOGGLE;
+			return NAME_TOGGLE;
 		}
 	}
 	
@@ -376,18 +382,18 @@ public class CommandSort extends BukkitCommand {
 		}
 		
 		switch (type) {
-//			case INT_TOGGLE:
-//				return SortMain.SortArrayListID(items);
-//			case INT_ASCENDING:
-//				return SortMain.SortAscending(items);
-//			case INT_DESCENDING:
-//				return SortMain.SortDescending(items);
-			case STRING_TOGGLE:
-				return SortMain.SortArrayListString(items);
-			case STRING_UP:
-				return SortMain.SortAlphabetUp(items);
-			case STRING_DOWN:
-				return SortMain.SortAlphabetDown(items);			
+//				return SortMain.SortArrayListString(items);
+//				return SortMain.SortAlphabetUp(items);
+//				return SortMain.SortAlphabetDown(items);
+			case NAME_TOGGLE:
+			case MATERIAL_TOGGLE:
+				return SortMain.SortArrayListMaterial(items);
+			case NAME_UP:
+			case MATERIAL_UP:
+				return SortMain.SortMaterialUp(items);
+			case NAME_DOWN:
+			case MATERIAL_DOWN:
+				return SortMain.SortMaterialDown(items);
 			default:
 				return null;
 		}	

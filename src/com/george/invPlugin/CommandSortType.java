@@ -30,30 +30,32 @@ public class CommandSortType extends BukkitCommand {
 		    	player = (Player) sender;
 		    	if (args.length == 0) {
 					if (player.hasPermission("inventorysort.type")) {
-						if (player.hasMetadata("type-name")) {
-							player.removeMetadata("type-name", InventorySort.getInstance());
-				            player.sendMessage(ChatColor.translateAlternateColorCodes('&', typeMessageID()));
-						} else if (!player.hasMetadata("type-name")) {
-							player.setMetadata("type-name", new FixedMetadataValue(InventorySort.getInstance(), 1));
+						if (player.hasMetadata("sort-type")) {
+							player.removeMetadata("sort-type", InventorySort.getInstance());
 				            player.sendMessage(ChatColor.translateAlternateColorCodes('&', typeMessageName()));
+						} else if (!player.hasMetadata("sort-type")) {
+							player.setMetadata("sort-type", new FixedMetadataValue(InventorySort.getInstance(), 1));
+				            player.sendMessage(ChatColor.translateAlternateColorCodes('&', typeMessageMaterial()));
 						}
 					} else {   
 						player.sendMessage(ChatColor.translateAlternateColorCodes('&', typeNoPermission()));
 					}
 		    	}
 			}
+			
 			return true;
 		}
+		
 		return false;
 	}
 
-	private String typeMessageID() {
-		String message = InventorySort.getInstance().getConfig().getConfigurationSection("messages").getString("sort-type-message-int");
+	private String typeMessageName() {
+		String message = InventorySort.getInstance().getConfig().getConfigurationSection("messages").getString("sort-type-message-name");
 		return message;
 	}
 
-	private String typeMessageName() {
-		String message = InventorySort.getInstance().getConfig().getConfigurationSection("messages").getString("sort-type-message-string");
+	private String typeMessageMaterial() {
+		String message = InventorySort.getInstance().getConfig().getConfigurationSection("messages").getString("sort-type-message-material");
 		return message;
 	}
 	
