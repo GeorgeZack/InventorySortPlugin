@@ -12,7 +12,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_13_R2.CraftServer;
+import org.bukkit.craftbukkit.v1_14_R1.CraftServer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class InventorySort extends JavaPlugin {
