@@ -24,6 +24,7 @@ hs_err_pid*
 
 # IntelliJ IDEA meta
 .idea/*
+*.iml
 
 # Build dir
 bin/*
