@@ -28,6 +28,3 @@ hs_err_pid*
 
 # Build dir
 bin/*
-
-# Final .jar dir
-export/*
