@@ -1,6 +1,6 @@
 name: InventorySort
 main: com.george.invPlugin.InventorySort
-version: 1.6.0
+version: 1.7.0
 commands:
     # sort:
         # description: Sorts inventory of player or of a chest.
