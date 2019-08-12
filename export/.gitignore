@@ -1,0 +1,5 @@
+# Ignore the plugin jar
+*
+
+# But not me
+!.gitignore
